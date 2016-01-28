@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='dpassgen',
-      version='1.0.0',
+      version='1.1',
       description='Generate passwords based on system dict, https://xkcd.com/936/',
       url='https://xkcd.com/936/',
       author='John Dulaney',
