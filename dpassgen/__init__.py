@@ -22,10 +22,10 @@ import os
 import random
 import sys
 
-def get_words(number):
+def get_words(number, dictionary):
     """Get $number of words"""
     try:
-        if os.path.exists('/usr/share/dict/words'):
+        if os.path.exists(dictionary):
             with open('/usr/share/dict/words', 'r') as words_file:
                 words = words_file.read().splitlines()
         else:
@@ -46,6 +46,7 @@ def dpassgen_cli():
     """cli entry point"""
     parser = argparse.ArgumentParser()
     parser.add_argument('number', help='Number of words to use in password')
+    parser.add_argument('-d', '--dictionary', help='Specify a custom dictionary')
     try:
         number = int(parser.parse_args().number)
     except ValueError:
@@ -53,7 +54,10 @@ def dpassgen_cli():
         print('Returns a password consisting of <number> of words')
         sys.exit()
 
-    print(get_words(number))
+    dictionary = str(parser.parse_args().dictionary)
+    if dictionary == 'None':
+        dictionary = '/usr/share/dict/words'
+    print(get_words(number, dictionary))
     return 0
 
 
